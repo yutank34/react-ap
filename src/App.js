@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getResponseCount } from './backend';
 // import logo from './logo.svg';
 import './styles.css';
@@ -25,8 +25,20 @@ function App() {
         message: e.toString()
       })
     }
-
   }
+  useEffect(() => {
+    try {
+      getResponseCount().then((response) => {
+        setCount(response)
+        setStatus({type: "loaded", message: ""})
+      })
+    } catch(e) {
+      setStatus({
+        type: "error",
+        message: e.toString()
+      })
+    }
+  }, [])
   const content = false ? (
     <p>
       Thanks for joining in! <br />
