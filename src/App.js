@@ -1,5 +1,6 @@
 import React from 'react';
 // import logo from './logo.svg';
+import './styles.css';
 import './App.css';
 
 function App() {
@@ -23,12 +24,10 @@ function App() {
         Name:
         <input value={name} onChange={(e) => setName(e.target.value)}/>
       </label>
-      <br />
       <label>
         Email:
         <input value={email} onChange={(e) => setEmail(e.target.value)} />
       </label>
-      <br />
       <button type="submit" onClick={() => changeStatus(true)}>
         I'll vouch for that
       </button>
