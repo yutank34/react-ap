@@ -27,17 +27,15 @@ function App() {
     }
   }
   useEffect(() => {
-    try {
       getResponseCount().then((response) => {
         setCount(response)
         setStatus({type: "loaded", message: ""})
-      })
-    } catch(e) {
+      }).catch(e => {
       setStatus({
         type: "error",
         message: e.toString()
       })
-    }
+    })
   }, [])
   const content = false ? (
     <p>
