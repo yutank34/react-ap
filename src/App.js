@@ -58,9 +58,11 @@ function App() {
         Email:
         <input value={email} onChange={(e) => setEmail(e.target.value)} />
       </label>
-      <button type="submit">
+      {status.type === 'busy' ? (<p>loading</p>) : (
+        <button type="submit">
         I'll vouch for that {requestCount}
-      </button>
+        </button>
+      )}
       { status.type === "error" && (
         <p>{status.message}</p>
       )}
