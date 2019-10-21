@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './styles.css';
 import './App.css';
 
 function App() {
-  const [name, setName] = React.useState("")
-  const [email, setEmail] = React.useState("")
-  const [submitted, changeStatus] = React.useState(false)
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [submitted, changeStatus] = useState(false)
   const content = submitted ? (
     <p>
       Thanks for joining in! <br />
