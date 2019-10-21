@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getResponseCount } from './backend';
+import { getResponseCount, postResponse } from './backend';
 // import logo from './logo.svg';
 import './styles.css';
 import './App.css';
@@ -16,9 +16,18 @@ function App() {
     event.preventDefault()
     setStatus({type: "busy", message: ""})
     try {
-      const response = await getResponseCount()
-      setCount(response)
-      setStatus({type: "loaded", message: ""})
+      const response = await postResponse({name: name, email: email})
+      console.log(response)
+      if (response.status === 'error') {
+        setStatus({
+          type: "error",
+          message: response.issues.email || response.issues.name || response.status
+        })
+      } else {
+        // setName(response.name)
+        // setEmail(response.email)
+        setStatus({type: "success", message: ""})
+      }
     } catch(e) {
       setStatus({
         type: "error",
@@ -37,12 +46,15 @@ function App() {
       })
     })
   }, [])
-  const content = false ? (
-    <p>
-      Thanks for joining in! <br />
-      When we're ready to wow you, <br />
-      You'll get an email.
-    </p>
+  const content = status.type === "success" ? (
+    <>
+      <p>Hello! {name}.</p>
+      <p>
+        Thanks for joining in! <br />
+        When we're ready to wow you, <br />
+        You'll get an email.
+      </p>
+    </>
   ) : (
     <form onSubmit={handleOnSubmit}>
       <p>
